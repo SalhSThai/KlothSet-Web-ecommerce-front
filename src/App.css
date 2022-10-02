@@ -12,6 +12,13 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.w3-animate-bottom{
+position:relative;
+animation:animatebottom 0.4s}
+@keyframes animatebottom{
+from{
+bottom:-300px;opacity:0} to{bottom:0;opacity:1}}
+
 
 .App-header {
   background-color: #282c34;

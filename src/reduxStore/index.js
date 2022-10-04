@@ -1,8 +1,9 @@
 
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from './AuthSlice'
-import menuReducer from './MenuSlice'
-import searchReducer from './SearchSlice'
+import authReducer from './AuthSlice';
+import menuReducer from './MenuSlice';
+import searchReducer from './SearchSlice';
+import loadingReducer from './LoadingSlice';
 
 
 
@@ -11,6 +12,7 @@ import searchReducer from './SearchSlice'
       auth: authReducer,
       menu: menuReducer,
       search:searchReducer,
+      loading:loadingReducer
     }
     
   })

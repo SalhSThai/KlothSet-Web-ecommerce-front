@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartDropdown from './Navbar/CartDropdown'
 import LoginDropdown from './Navbar/LoginDropdown'
@@ -5,11 +6,14 @@ import MenuSideBar from './Navbar/MenuSideBar'
 import NotificationDropdown from './Navbar/NotificationDropdown'
 import SearchBar from './Navbar/SearchBar'
 import SearchModal from './Navbar/SearchModal'
+import Spinner from './reuseComponent/Spinner'
 function Navbar() {
-
-
+    const state = useSelector(state => state.loading);
+    const dispatch = useDispatch()
+    
     return (
         <>
+        {state.loadingShow?<Spinner/>:null}
             <div className='flex flex-col justify-center items-center w-screen '>
                 <nav className="flex justify-center items-center shadow w-full h-[120px] " >
                     <div className='flex justify-between items-center h-full w-5/6'>

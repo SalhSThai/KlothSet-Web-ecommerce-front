@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../reduxStore";
 import { login, register, showLogin,showRegister, thunkRegister } from "../../reduxStore/AuthSlice";
+import {loading} from '../../reduxStore/LoadingSlice';
+import toastify from '../../Toast/toastify';
 
 function RegisForm(props) {
   const initialState = {
@@ -15,15 +17,21 @@ function RegisForm(props) {
     lname:'',
   }
   const [registerForm, setRegister] = useState(initialState)
-  const state = useSelector(state => state.auth);
-  const dispatch = useDispatch()
 
+  const dispatch = useDispatch()
+  
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(thunkRegister(registerForm));
-    setRegister(initialState);
-    dispatch(showLogin(true));
-    dispatch(showRegister(false));
+    try {
+      dispatch(thunkRegister(registerForm));
+    } catch (error) {
+      toastify();
+    }
+    finally{
+      setRegister(initialState);
+      dispatch(showLogin(true));
+      dispatch(showRegister(false));
+    }
   }
 
   return (
@@ -43,13 +51,6 @@ function RegisForm(props) {
 
       <label htmlFor="phone" >Phone Number</label>
       <input id="phone" type="text" value={registerForm?.phonenumber} onChange={e => setRegister({ ...registerForm, phonenumber: e.target.value })}></input>
-
-      <label htmlFor="fname">First Name</label>
-      <input id="fname" type="text" value={registerForm?.firstName} onChange={e => setRegister({ ...registerForm, firstName: e.target.value })}></input>
-
-      <label htmlFor="lname" >Last Name</label>
-      <input id="lname" type="text" value={registerForm?.lastName} onChange={e => setRegister({ ...registerForm, lastName: e.target.value })}></input>
-      
       <Button type="submit" outline={true} gradientDuoTone="tealToLime"><div >SUBMIT</div></Button>
     </form>
 

@@ -1,6 +1,4 @@
 import CarousalComponent from '../Components/CarousalComponent';
-import Dropdown from '../Components/reuseComponent/Dropdown';
-
 
 function HomePage(props) {
 

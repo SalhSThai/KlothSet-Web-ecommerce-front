@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import axios from '../config/axios';
+import {loading} from './LoadingSlice'
 
 const authSlice = createSlice({
     name: 'auth',
@@ -32,14 +34,19 @@ const authSlice = createSlice({
 
 export const thunkRegister = registerInfo => async dispatch => {
     try {
+        dispatch(loading(true))
         const res = await axios.post('/auth/register',registerInfo)
         res.data.status === 'success' && dispatch(register(true))
     } catch (error) {
-        
+        throw error
+    }
+    finally{
+        dispatch(loading(false))
     }
 }
 export const thunkLogin = loginInfo => async dispatch => {
     try {
+        dispatch(loading(true))
         const res = await axios.post('/auth/login',loginInfo)
         if(res.data.status === 'success') {
             localStorage.setItem('token',res.data.token);
@@ -47,7 +54,10 @@ export const thunkLogin = loginInfo => async dispatch => {
     }
         
     } catch (error) {
-        
+        throw error
+    }
+    finally{
+        dispatch(loading(false))
     }
 }
 

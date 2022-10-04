@@ -3,7 +3,8 @@ import Layout from './Components/Layout';
 import HomePage from './Pages/HomePage';
 
 function App() {
-  return (
+  
+    return (
     <Routes>
       <Route path='/' element= {<Layout/>}>
         <Route path='/' element={<HomePage />} />

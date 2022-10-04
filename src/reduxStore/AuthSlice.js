@@ -12,9 +12,14 @@ const authSlice = createSlice({
             state.showRegister = action.payload;
         },
         login: (state, action) => {
-            localStorage.setItem('token',action.payload.token);
-            state.userInfo = action.payload.data.username
+            console.log(action);
+            state.userInfo = action.payload.user
+            console.log(state.userInfo);
             state.isLogin = true;
+        },
+        logout: (state, action) => {
+            localStorage.removeItem('token')
+            state.isLogin = false;
         },
         rememberLogin:(state, action)=>{
             state.isLogin = true;
@@ -27,7 +32,6 @@ const authSlice = createSlice({
 
 export const thunkRegister = registerInfo => async dispatch => {
     try {
-        console.log(registerInfo);
         const res = await axios.post('/auth/register',registerInfo)
         res.data.status === 'success' && dispatch(register(true))
     } catch (error) {
@@ -36,9 +40,11 @@ export const thunkRegister = registerInfo => async dispatch => {
 }
 export const thunkLogin = loginInfo => async dispatch => {
     try {
-        console.log(loginInfo);
         const res = await axios.post('/auth/login',loginInfo)
-        res.data.status === 'success' && dispatch(login({token:res.data.token,data:res.data.data}))
+        if(res.data.status === 'success') {
+            localStorage.setItem('token',res.data.token);
+            dispatch(login({"user":res.data.data}))
+    }
         
     } catch (error) {
         
@@ -46,5 +52,5 @@ export const thunkLogin = loginInfo => async dispatch => {
 }
 
 export default authSlice.reducer
-const { login, register, showLogin,showRegister ,rememberLogin} = authSlice.actions;
-export { login, register, showLogin,showRegister,rememberLogin }
+const { login, register, showLogin,showRegister ,rememberLogin,logout} = authSlice.actions;
+export { login, register, showLogin,showRegister,rememberLogin ,logout}

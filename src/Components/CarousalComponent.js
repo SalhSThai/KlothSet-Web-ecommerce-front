@@ -2,7 +2,7 @@ import { Carousel } from 'flowbite-react'
 
 function CarousalComponent() {
     return (
-            <div className=" w-[1000px] sm:h-64 xl:h-80 2xl:h-96  ">
+            <div className=" w-5/6 h-full   ">
                 <Carousel  slideInterval={1000}>
                     <img
                         src="images/carousal/Carousal3.gif"

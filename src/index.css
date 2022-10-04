@@ -13,14 +13,35 @@ from{
 bottom:-300px;opacity:0} 
 to{bottom:0;opacity:1}
 }
+.fadeleft {
+  position:relative;  
+  animation:animateleft 0.6s 
+  }
+  
+  @keyframes animateleft{
+  from{
+  left:-300px;opacity:0} 
+  to{left:0;opacity:1}
+  }
+  .fadeleftout {
+    position:relative;  
+    animation:fadeleftout 1s 
+    }
+    
+    @keyframes fadeleftout{
+    from{
+      left:0px;opacity:1} 
+    to{left:-300px;opacity:0}
+    }
 .dropdownShadow{
     box-shadow: 0.5px 1px 3px 1px rgba(0, 0, 0, 0.2);
 }
 .Divider{
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-
+.growShadow{
+  box-shadow: 3px 3px 5px 5px rgba(252, 255, 240, 0.50);
+}
 
 .carouselContainer {
 width: 500px;

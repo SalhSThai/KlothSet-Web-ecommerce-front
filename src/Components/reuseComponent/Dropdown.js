@@ -20,7 +20,7 @@ export default function Dropdown(props) {
                 {title}{arrow && <i className="fa-solid fa-angle-down m-1"></i>}
             </button>
             <div >
-                {isOpenDropdown && <div className={`absolute flex flex-col justify-start gap-2 dropdownShadow min-w-max bg-white`} style={{width}}>{children}</div>}
+                {isOpenDropdown && <div className={`absolute  flex flex-col justify-start gap-2 dropdownShadow min-w-max bg-white ${props?.id ? 'right-0':null}`} style={{width}}>{children}</div>}
             </div>
         </div>
     )

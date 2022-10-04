@@ -15,7 +15,7 @@ function RegisForm(props) {
     lname:'',
   }
   const [registerForm, setRegister] = useState(initialState)
-  const state = useSelector(state => state);
+  const state = useSelector(state => state.auth);
   const dispatch = useDispatch()
 
   const onSubmit = (event) => {
@@ -23,11 +23,11 @@ function RegisForm(props) {
     dispatch(thunkRegister(registerForm));
     setRegister(initialState);
     dispatch(showLogin(true));
-    dispatch(showRegister(false))
+    dispatch(showRegister(false));
   }
 
   return (
-    <form className="flex flex-col  items-start" onSubmit={onSubmit}>
+    <form  className="flex flex-col  items-start" onSubmit={onSubmit}>
 
       <label htmlFor="username">Username</label>
       <input id="username" type="text" value={registerForm?.username} onChange={e => setRegister({ ...registerForm, username: e.target.value })}></input>

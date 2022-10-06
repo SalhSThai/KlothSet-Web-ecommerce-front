@@ -14,9 +14,7 @@ const authSlice = createSlice({
             state.showRegister = action.payload;
         },
         login: (state, action) => {
-            console.log(action);
             state.userInfo = action.payload.user
-            console.log(state.userInfo);
             state.isLogin = true;
         },
         logout: (state, action) => {

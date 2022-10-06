@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 function Footer() {
-    return (<>
+    return (<><div className='w-auto h-[200px] bg-slate-200 m-10'></div>
 
         {/* <div className="fixed-bottom p-3 mb-2 text-dark contact" id="contact">
             <div className="L_contact">

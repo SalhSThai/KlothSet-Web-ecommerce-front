@@ -6,7 +6,6 @@ export default function SideBar(props) {
     const [closeAnimate,setCloseAnimate] = useState(false)
     const onClose = (e)=>{
         setCloseAnimate(true);
-        console.log(e.target.className);
         setTimeout(()=>{
             close();
             setCloseAnimate(false);

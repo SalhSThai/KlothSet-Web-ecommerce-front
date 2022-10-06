@@ -4,6 +4,7 @@ import authReducer from './AuthSlice';
 import menuReducer from './MenuSlice';
 import searchReducer from './SearchSlice';
 import loadingReducer from './LoadingSlice';
+import dataReducer from './DataSlice';
 
 
 
@@ -12,7 +13,8 @@ import loadingReducer from './LoadingSlice';
       auth: authReducer,
       menu: menuReducer,
       search:searchReducer,
-      loading:loadingReducer
+      loading:loadingReducer,
+      data:dataReducer
     }
     
   })

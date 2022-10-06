@@ -19,9 +19,11 @@ export default function LoginDropdown() {
         };
         remember(localStorage.getItem('token'))
     },[])
-    return state.isLogin?<UserDropdown  userInfo={state.userInfo}/>:<GuestDropdown />
+    console.log(state.userInfo);
+    return state.isLogin?<UserDropdown userInfo={state.userInfo}/>:<GuestDropdown />
 }
 
+function SellerDropdown(props) {}
 
 
 function GuestDropdown(props) {
@@ -41,29 +43,70 @@ function GuestDropdown(props) {
 }
 
 function UserDropdown(props) {
-    const state = useSelector(state => state.auth);
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const clickSignout = (e)=>{
         dispatch(logout())
         navigate('/')
     }
-    console.log(props.userInfo?.username);
-
+// ==========================================================  User
+if(props.userInfo.role==="1"){
     return (<div>
         <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
-            <DropdownHeader><span className="block text-sm">
+            <DropdownHeader><span className="block text-lg">
                 {props.userInfo?.username}
             </span>
-                <span className="block text-sm font-medium truncate">
+                <span className="block text-lg font-medium truncate">
                 {props.userInfo?.email}
                 </span></DropdownHeader>
 
             <DropdownDivider></DropdownDivider>
+            <DropdownItem  >Profile</DropdownItem>
             <DropdownItem  >Setting</DropdownItem>
             <DropdownDivider></DropdownDivider>
             <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
         </Dropdown>
     </div>
     )
+}
+// ==========================================================  Seller
+else if (props.userInfo.role==="2"){
+    return (<div>
+        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
+            <DropdownHeader><span className="block text-lg">
+                {props.userInfo?.username}
+            </span>
+                <span className="block text-lg font-medium truncate">
+                {props.userInfo?.email}
+                </span></DropdownHeader>
+
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem  ><Link to={`/shopProfile/${props.userInfo?.ShopPath?.shopPath}`}>Shop</Link></DropdownItem>
+            <DropdownItem  ><Link to={`/shopProfile/${props.userInfo?.ShopPath?.shopPath}/setting`}>Setting</Link></DropdownItem>
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
+        </Dropdown>
+    </div>
+    )
+}
+// ==========================================================  Admin
+else if (props.userInfo.role==="0"){
+    return (<div>
+        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
+            <DropdownHeader><span className="block text-lg">
+                {props.userInfo?.username}
+            </span>
+                <span className="block text-lg font-medium truncate">
+                {props.userInfo?.email}
+                </span></DropdownHeader>
+
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem  >edit</DropdownItem>
+            <DropdownItem  >Setting</DropdownItem>
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
+        </Dropdown>
+    </div>
+    )
+}
 }

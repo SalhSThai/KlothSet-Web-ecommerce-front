@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 
-export default function SideBar(props) {
+export default function Drawer(props) {
     const { children, title = <h1>Login</h1>, header = true ,labelHeader,status ,close,show} = props;
     const [closeAnimate,setCloseAnimate] = useState(false)
     const onClose = (e)=>{

@@ -5,21 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from '../../reduxStore';
 import LoginModal from './LoginModal';
 import RegisModal from './RegisModal';
-import axios from '../../config/axios';
-import { login, logout } from '../../reduxStore/AuthSlice';
+import { login, logout, thunkRemember } from '../../reduxStore/AuthSlice';
+import { rememberMe } from '../../api/authApi';
 
 export default function LoginDropdown() {
 
     const state = useSelector(state => state.auth);
-    const dispatch = useDispatch()
-    useEffect(()=>{
-        const remember = async (token) =>  {
-            const user =  token ? await axios.post('/auth/remember',{token},{headers:{Authorization:`Bearer ${token}`}}):null;
-            user && dispatch(login(user.data));
-        };
-        remember(localStorage.getItem('token'))
-    },[])
-    console.log(state.userInfo);
+    const dispatch = useDispatch() 
+    
+    
     return state.isLogin?<UserDropdown userInfo={state.userInfo}/>:<GuestDropdown />
 }
 

@@ -6,15 +6,14 @@ import HomePage from './Pages/HomePage';
 import ProfileHomePage from './Pages/ProfileHomePage';
 import ShopHomePage from './Pages/ShopHomePage';
 import ShopSettingPage from './Pages/ShopSettingPage';
-import { thunkPath } from './reduxStore/DataSlice';
+import FunctionFetch from './function/FunctionFetch';
+
 
 function App() {
   const state = useSelector(state => state);
   const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(thunkPath())
-  },[])
-  return (
+
+  return (<div>
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route path='/' element={<HomePage />} />
@@ -24,6 +23,8 @@ function App() {
         <Route path='*' element={<h1>404! this page is not found!!!</h1>} />
       </Route>
     </Routes>
+    <FunctionFetch/>
+    </div>
   );
 }
 

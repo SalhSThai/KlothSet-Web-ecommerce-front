@@ -5,7 +5,8 @@ import menuReducer from './MenuSlice';
 import searchReducer from './SearchSlice';
 import loadingReducer from './LoadingSlice';
 import dataReducer from './DataSlice';
-
+import editBarReducer from './EditBarSlice';
+import shopReducer from './ShopSlice'
 
 
   export const store = configureStore({
@@ -14,7 +15,9 @@ import dataReducer from './DataSlice';
       menu: menuReducer,
       search:searchReducer,
       loading:loadingReducer,
-      data:dataReducer
+      data:dataReducer,
+      editbar:editBarReducer,
+      shop:shopReducer
     }
     
   })

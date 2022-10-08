@@ -5,6 +5,7 @@ import { authActions } from "../../reduxStore";
 import { login, register, showLogin,showRegister, thunkRegister } from "../../reduxStore/AuthSlice";
 import {loading} from '../../reduxStore/LoadingSlice';
 import toastify from '../../Toast/toastify';
+import TextInputBar from "../item/TextInputBar";
 
 function RegisForm(props) {
   const initialState = {
@@ -37,20 +38,12 @@ function RegisForm(props) {
   return (
     <form  className="flex flex-col  items-start" onSubmit={onSubmit}>
 
-      <label htmlFor="username">Username</label>
-      <input id="username" type="text" value={registerForm?.username} onChange={e => setRegister({ ...registerForm, username: e.target.value })}></input>
+      <TextInputBar label="Username" id="username" value={registerForm?.username} onChange={e => setRegister({ ...registerForm, username: e.target.value })}/>
+      <TextInputBar label="Password" id="password" type="password" value={registerForm?.password} onChange={e => setRegister({ ...registerForm, password: e.target.value })}/>
+      <TextInputBar label="Confirm Password" id="cpassword" type="password" value={registerForm?.cpassword} onChange={e => setRegister({ ...registerForm, cpassword: e.target.value })}/>
+      <TextInputBar label="Your Email" id="email" type="email" value={registerForm?.email} onChange={e => setRegister({ ...registerForm, email: e.target.value })}/>
+      <TextInputBar label="Phone Number" id="phonenumber"  value={registerForm?.phonenumber} onChange={e => setRegister({ ...registerForm, phonenumber: e.target.value })}/>
 
-      <label htmlFor="password" >Password</label>
-      <input id="password" type="password" value={registerForm?.password} onChange={e => setRegister({ ...registerForm, password: e.target.value })}></input>
-
-      <label htmlFor="cpassword" >Confirm Password</label>
-      <input id="cpassword" type="password" value={registerForm?.cpassword} onChange={e => setRegister({ ...registerForm, cpassword: e.target.value })}></input>
-
-      <label htmlFor="email">Your Email</label>
-      <input id="email" type="email" value={registerForm?.email} onChange={e => setRegister({ ...registerForm, email: e.target.value })}></input>
-
-      <label htmlFor="phone" >Phone Number</label>
-      <input id="phone" type="text" value={registerForm?.phonenumber} onChange={e => setRegister({ ...registerForm, phonenumber: e.target.value })}></input>
       <Button type="submit" outline={true} gradientDuoTone="tealToLime"><div >SUBMIT</div></Button>
     </form>
 

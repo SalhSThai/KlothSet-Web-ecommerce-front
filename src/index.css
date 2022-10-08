@@ -100,6 +100,7 @@ color: white;
 }
 
 
+/* 
 input[type=text] {
   box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
   @apply outline-none border-gray-100 rounded-lg w-full m-5  self-center
@@ -112,7 +113,7 @@ input[type=text]:focus {
  
   
 }
-input[type=password] {
+[type=password] {
   box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
   @apply outline-none border-gray-100 rounded-lg w-full m-5  self-center
 
@@ -137,6 +138,6 @@ input[type=email]:focus {
  
   
 }
-
+ */
 
 

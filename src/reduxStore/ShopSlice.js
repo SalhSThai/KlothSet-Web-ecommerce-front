@@ -14,9 +14,7 @@ const ShopSlice = createSlice({
 
 export const thunkAuthShopData = userId => async dispatch => {
     try {
-        console.log(userId,'userId');
         const res = await fetchAuthShopDataApi(userId)
-        console.log(res,'res');
         dispatch(factchShopInfo(res.data))
     } catch (error) {
         throw error

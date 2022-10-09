@@ -9,9 +9,9 @@ export default function ChangeProfilePicture() {
     const state = useSelector(state => state);
     const dispatch = useDispatch()
     const [newImage, setNewImage] = useState('');
-    const { profileImage, shopName } = state?.shop?.shopInfo?.data;
+    const data = state?.shop?.shopInfo;
     useEffect(() => {
-        setNewImage(profileImage)
+        setNewImage(data?.profileImage)
      }, [])
     return (
         <NewModal status={state?.editbar?.changeProfilePicture} labelHeader="Change Profile Logo" close={e => dispatch(showChangeProfilePicture(false))}>

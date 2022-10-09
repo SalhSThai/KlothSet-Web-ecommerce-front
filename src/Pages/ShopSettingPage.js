@@ -13,7 +13,9 @@ export default function ShopSettingPage() {
   const param = useParams()
   const state = useSelector(state => state);
   const dispatch = useDispatch()
-  const { profileImage, shopName } = state?.shop?.shopInfo?.data;
+  const data = state?.shop?.shopInfo;
+  console.log(data,"data");
+
 
   const Card = () => {
     return <div className='w-full bg-blue-500 '>
@@ -32,17 +34,16 @@ export default function ShopSettingPage() {
     </div>)
   }
 
-
   return (
-    <div className='flex justify-center  w-screen h-auto '>
+    <div className={`flex justify-center  w-screen h-auto ${ state.auth?.userInfo?.ShopPath?.shopPath === param?.shopName? null : 'hidden'}`}>
       <div className='flex flex-col justify-center items-center w-3/4 h-full'>
         <div className='w-full h-[350px] bg-slate-400' />
         <div className='relative w-full h-[120px] bg-slate-300'>
           <div className='absolute w-[250px] h-[250px]  bottom-0 left-0 flex flex-col justify-center items-center overflow-hidden'>
-            <div className='relative rounded-full w-[150px] h-[150px] bg-center bg-cover' style={{ backgroundImage: `url(${profileImage})` }} >
+            <div className='relative rounded-full w-[150px] h-[150px] bg-center bg-cover' style={{ backgroundImage: `url(${data?.profileImage})` }} >
               <AddButton className='absolute bottom-0 right-0' onClick={e => dispatch(showChangeProfilePicture(true))} />
             </div>
-            <div className='text-4xl font-bold 10-text-only' >{shopName}</div>
+            <div className='text-4xl font-bold 10-text-only' >{data?.shopName}</div>
 
           </div>
           <div className='absolute bottom-0 left-0 mb-2 w-[250px]  overflow-hidden text-center'>
@@ -55,9 +56,10 @@ export default function ShopSettingPage() {
         <div className=' w-full h-full gap-[10px] flex  '>
           <SideBar />
           <div className='grid grid-flow-row-dense  grid-cols-2 grow'>
+          {data?.Products?.map((i)=><ProductCard key={i?.id} image={i?.productImage} productName={i?.productName} brandName={i?.brandName} price={i?.price}/>)}
+            {/* <ProductCard image  productName brandName price/>
             <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
+            <ProductCard/> */}
             
 
           </div>

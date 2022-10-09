@@ -13,18 +13,16 @@ function App() {
   const state = useSelector(state => state);
   const dispatch = useDispatch()
 
-  return (<div>
+  return (
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route path='/' element={<HomePage />} />
         <Route  path='/userProfile/:id' element={<ProfileHomePage />} ></Route>
         <Route  path='/shopProfile/:shopName' element={<ShopHomePage />} ></Route>
-        {state.auth?.userInfo.role === "2" ? (<Route  path={`/shopProfile/:shopName/setting`} element={<ShopSettingPage />} />):null}
+        {state.auth?.userInfo?.role === "2" ? (<Route  path={`/shopProfile/:shopName/setting`} element={<ShopSettingPage />} />):null}
         <Route path='*' element={<h1>404! this page is not found!!!</h1>} />
       </Route>
     </Routes>
-    <FunctionFetch/>
-    </div>
   );
 }
 

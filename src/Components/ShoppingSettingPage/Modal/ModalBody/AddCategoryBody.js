@@ -5,19 +5,27 @@ import TextInputBar from '../../../item/TextInputBar';
 
 export default function AddCategoryBody() {
     const state = useSelector(state => state);
-    const {shopName,email,phonenumber,ShopPath:{shopPath}} = state?.auth?.userInfo
-    const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const data = state?.shop?.shopInfo?.data;
     const initialInfo = {
-        category:"",
-        subCategory:"",
+        category: "",
+        subCategory: "",
     }
-    const [addCategoryState,setAddCategoryState] = useState(initialInfo);
-console.log(state);
+    const Category = data?.Categories?.map(i=>i.categoryName);
+    const [addCategoryState, setAddCategoryState] = useState(initialInfo);
+    const onChangeCategory = (e) => {
+        setAddCategoryState({ ...addCategoryState, category: e.target.value })
+     }
+
     return (
-        <div>
+        <div className='flex justify-around items-center w-full  h-full'>
+            <div className='w-1/3 h-fit min-h-[300px] bg-slate-100'>
+
+            </div>
             <form className='grid grid-flow-row-dense grid-cols-4  justify-center items-start '>
-                <TextInputBar className={"col-span-4"} label="Category" id="categoryAdd" value={addCategoryState?.size} onChange={e => setAddCategoryState({ ...addCategoryState, category: e.target.value })} placeHolder={shopPath} />
-                <TextInputBar className={"col-span-4"} label="Sub Category" id="subCategoryAdd" value={addCategoryState?.productName} onChange={e => setAddCategoryState({ ...addCategoryState, subCategory: e.target.value })} placeHolder={shopName} />
+                <TextInputBar subType="select" selectMember={[]} className={"col-span-4"} label="Category" id="categoryAdd" value={addCategoryState?.category} onChange={e => setAddCategoryState({ ...addCategoryState, category: e.target.value })} placeHolder={addCategoryState?.category} />
+                <TextInputBar className={"col-span-4"} label="Category" id="categoryAdd" value={addCategoryState?.category} onChange={e => setAddCategoryState({ ...addCategoryState, category: e.target.value })} placeHolder={addCategoryState?.category} />
+                
                 <Button className={"col-span-4"}>SUBMIT</Button>
             </form>
         </div>

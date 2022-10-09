@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Logo from '../Asset/Logo'
+import FunctionFetch from '../function/FunctionFetch'
 import CartDropdown from './Navbar/CartDropdown'
 import LoginDropdown from './Navbar/LoginDropdown'
 import MenuSideBar from './Navbar/MenuSideBar'
@@ -34,6 +35,7 @@ function Navbar() {
                 <SearchModal />
 
             </div>
+            <FunctionFetch/>
         </>
     )
 }

@@ -1,18 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { showEditProduct } from '../../../reduxStore/EditBarSlice';
 import NewModal, { ModalBody } from '../../reuseComponent/NewModal';
-import EditProductBody from './ModalBody/EditProductBody';
+import AddSubProductBody from './ModalBody/AddSubProductBody';
 
-export default function EditProduct(props) {
-  const {status,image , id, onClose,} = props 
+export default function AddSubProduct(props) {
+  const {status,image , id, onClose,productName,index} = props 
   const state = useSelector(state => state);
   const dispatch = useDispatch()
   return (
-    <NewModal custom labelHeader="Edit Product" onClose={onClose} status={status} close={onClose} outside={true} width={"w-5/6"}>
+      <NewModal labelHeader={productName}  status={status} close={onClose} outside={true} width={"w-5/6"} >
       <ModalBody>
         <div className='flex flex-col justify-center items-center w-full h-full'>
-           <EditProductBody/>
+          <AddSubProductBody image={image} index={index}/>
         </div>
       </ModalBody>
     </NewModal>

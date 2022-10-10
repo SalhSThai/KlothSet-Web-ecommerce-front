@@ -24,7 +24,7 @@ const initialState = {
   return (
     <form className="flex flex-col  items-start" onSubmit={onSubmit}>
 
-      <TextInputBar  label="Username or Email" id="loginUsername" value={loginForm?.username} onChange={e => setLoginForm({ ...loginForm, username: e.target.value })}/>
+      <TextInputBar  label="Username or Email" id="loginUsername " value={loginForm?.username} onChange={e => setLoginForm({ ...loginForm, username: e.target.value })}/>
       <TextInputBar  label="Password" id="loginPassword" type="password" value={loginForm?.password} onChange={e => setLoginForm({ ...loginForm, password: e.target.value })}/>
      
 

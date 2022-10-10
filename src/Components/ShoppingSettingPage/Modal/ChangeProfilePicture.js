@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CutoutCircle from '../../../Asset/CutoutCircle';
-import { showChangeProfilePicture } from '../../../reduxStore/EditBarSlice';
 import FileButton from '../../item/FileButton';
 import NewModal, { ModalBody } from '../../reuseComponent/NewModal';
 
-export default function ChangeProfilePicture() {
+export default function ChangeProfilePicture(props) {
+    const {status,onClose ,image} = props
     const state = useSelector(state => state);
     const dispatch = useDispatch()
     const [newImage, setNewImage] = useState('');
     const data = state?.shop?.shopInfo;
     useEffect(() => {
-        setNewImage(data?.profileImage)
+        setNewImage(image)
      }, [])
     return (
-        <NewModal status={state?.editbar?.changeProfilePicture} labelHeader="Change Profile Logo" close={e => dispatch(showChangeProfilePicture(false))}>
+        <NewModal status={status} labelHeader="Change Profile Logo" close={onClose}>
             <ModalBody>
                 <div className='flex flex-col justify-center items-center w-full h-full'>
                     <CutoutCircle className="w-[300px] h-[300px] relative " image={newImage}></CutoutCircle>

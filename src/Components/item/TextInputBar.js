@@ -2,7 +2,7 @@ import React from 'react'
 import CheckBox from './CheckBox'
 
 export default function TextInputBar(props) {
-    const { label = "input", onChange, value, placeHolder, id, type = "text", subType = "text", selectMember = [], className = "", icon,check = false,labelCheck,onCheck } = props
+    const { label = "input", onChange, value, placeHolder, id, type = "text", subType = "text", selectMember = [], className = "", icon,check = false,labelCheck,onCheck ,defaultValue ,disable} = props
     if (subType === "text") {
         return (
             <div className={`relative w-full my-3 ${className}`}>
@@ -22,7 +22,9 @@ export default function TextInputBar(props) {
                         value={value}
                         placeholder={placeHolder}
                         style={{ boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.1)" }}
-                        onChange={onChange} />
+                        onChange={onChange} 
+                        disabled ={disable}
+                        />
 
                 </div>
             </div>
@@ -41,13 +43,18 @@ export default function TextInputBar(props) {
                         value={value}
                         placeholder={placeHolder}
                         style={{ boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.1)" }}
-                        onChange={onChange} />
+                        onChange={onChange} 
+                        disabled ={disable}/>
                 <select className={`${check?" hidden ":" block "} w-full border 
                  bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 
                  rounded-lg p-2.5 text-sm`}
                     id={id}
-                    onChange={onChange}>
-                    {selectMember.map((item, index) => <option key={index}>{item}</option>)}
+                    onChange={onChange}
+                    defaultValue={value || selectMember?.[0] || 'Select'}
+                    disabled ={disable}
+                    >
+                       {disable? <option value={value}>{value}</option>:null}
+                    {selectMember.map((item, index) => <option key={index} value={item}>{item}</option>)}
                 </select>
             </div>
             

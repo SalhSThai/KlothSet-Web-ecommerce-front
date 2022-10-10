@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default function Dropdown(props) {
-    const { children, title = <h1>TITLE</h1>, arrow = true,width=100 } = props
+    const { children, title = <h1>TITLE</h1>, arrow = true, width = 100 } = props
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const dropdownEl = useRef();
     useEffect(() => {
@@ -16,17 +16,17 @@ export default function Dropdown(props) {
 
     return (
         <div className='flex flex-col justify-start items-start relative z-30' ref={dropdownEl}>
-            <button className="flex justify-start items-center "  onClick={() => setIsOpenDropdown((prev) => !prev)} >
+            <button className="flex justify-start items-center " onClick={() => setIsOpenDropdown((prev) => !prev)} >
                 {title}{arrow && <i className="fa-solid fa-angle-down m-1"></i>}
             </button>
             <div >
-                {isOpenDropdown && <div className={`absolute  flex flex-col justify-start gap-2 dropdownShadow min-w-max bg-white ${props?.id ? 'right-0':null}`} style={{width}}>{children}</div>}
+                {isOpenDropdown && <div className={`absolute  flex flex-col justify-start gap-2 dropdownShadow min-w-max bg-white ${props?.id ? 'right-0' : null}`} style={{ width }}>{children}</div>}
             </div>
         </div>
     )
-    
-    
-    
+
+
+
 }
 
 function DropdownHeader(props) {
@@ -35,7 +35,13 @@ function DropdownHeader(props) {
 }
 function DropdownItem(props) {
     const { children } = props
-    return <div className='p-4'>{children}</div>
+    return <div>
+        <div className='p-4 flex justify-between items-center'>
+        {children}
+
+        </div>
+        <DropdownDivider />
+    </div>
 }
 function DropdownDivider() {
     return <div className='w-full Divider'></div>

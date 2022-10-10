@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const EditBarSlice = createSlice({
     name: 'editBar',
-    initialState: { editProfile: false, newProduct: false, editProduct: false, addCategory: false,changeProfilePicture:false },
+    initialState: { editProfile: false, newProduct: false, editProduct: false, addCategory: false ,banerPictureModal:false},
     reducers: {
         showEditProfile: (state, action) => {
             state.editProfile = action.payload
@@ -13,16 +13,16 @@ const EditBarSlice = createSlice({
         showEditProduct: (state, action) => {
             state.editProduct = action.payload
         },
-        showAddCategory: (state, action) => {
+        showAddCategory: (state, action) => { 
             state.addCategory = action.payload
         },
-        showChangeProfilePicture: (state, action) => {
-            state.changeProfilePicture = action.payload
+        showAddBanerPicture: (state, action) => {
+            state.banerPictureModal = action.payload
         },
     }
 })
 
 
 export default EditBarSlice.reducer
-const { showEditProfile, showNewProduct, showEditProduct, showAddCategory ,showChangeProfilePicture} = EditBarSlice.actions;
-export { showEditProfile, showNewProduct, showEditProduct, showAddCategory ,showChangeProfilePicture}
+const { showEditProfile, showNewProduct, showEditProduct, showAddCategory ,showAddBanerPicture} = EditBarSlice.actions;
+export { showEditProfile, showNewProduct, showEditProduct, showAddCategory ,showAddBanerPicture}

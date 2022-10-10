@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function ShopHomePage() {
     const state = useSelector(state => state);
     const dispatch = useDispatch()
+    console.log(state);
 
     const Card = () => {
         return <div className='w-1/3 bg-blue-500 '>

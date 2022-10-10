@@ -13,7 +13,6 @@ export default function ModalShopSetting() {
             <EditProfile />
             <EditProduct />
             <AddCategory />
-            <ChangeProfilePicture/>
         </div>
     )
 }

@@ -7,7 +7,7 @@ import loadingReducer from './LoadingSlice';
 import dataReducer from './DataSlice';
 import editBarReducer from './EditBarSlice';
 import shopReducer from './ShopSlice'
-
+import cartReducer from './CartSlice'
 
   export const store = configureStore({
     reducer:{
@@ -17,7 +17,8 @@ import shopReducer from './ShopSlice'
       loading:loadingReducer,
       data:dataReducer,
       editbar:editBarReducer,
-      shop:shopReducer
+      shop:shopReducer,
+      cart:cartReducer
     }
     
   })

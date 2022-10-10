@@ -3,8 +3,8 @@ import { Children } from 'react'
 
 function CarousalComponent() {
     return (
-        <div className='flex justify-center items-start w-screen h-[1080px]'>
-            <div className=" w-5/6 h-full   ">
+        <div className='flex justify-center items-start w-screen h-[400px]'>
+            <div className=" w-3/5 h-full   ">
                 <Carousel slideInterval={1000}>
                     <img
                         src="images/carousal/Carousal3.gif"

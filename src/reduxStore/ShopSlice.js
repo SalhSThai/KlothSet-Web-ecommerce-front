@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAuthShopDataApi } from "../api/authShopApi";
+import { fetchAuthShopDataApi, uploadCarousal } from "../api/authShopApi";
 
 
 const ShopSlice = createSlice({
@@ -9,6 +9,7 @@ const ShopSlice = createSlice({
         factchShopInfo: (state, action) => {
             state.shopInfo =action.payload
         },
+
     }
 })
 
@@ -16,6 +17,16 @@ export const thunkAuthShopData = userId => async dispatch => {
     try {
         const res = await fetchAuthShopDataApi(userId)
         dispatch(factchShopInfo(res.data))
+    } catch (error) {
+        throw error
+    }
+    finally{
+    }
+}
+export const thunkUploadCarousal = (userId) => async dispatch => {
+    try {
+        const res = await uploadCarousal(userId)
+        // dispatch(factchShopInfo(res.data))
     } catch (error) {
         throw error
     }

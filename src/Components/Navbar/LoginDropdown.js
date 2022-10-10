@@ -9,89 +9,35 @@ import { login, logout, thunkRemember } from '../../reduxStore/AuthSlice';
 import { rememberMe } from '../../api/authApi';
 
 export default function LoginDropdown() {
-
-    const state = useSelector(state => state.auth);
-    const dispatch = useDispatch() 
-    
-    
-    return state.isLogin?<UserDropdown userInfo={state.userInfo}/>:<GuestDropdown />
-}
-
-function SellerDropdown(props) {}
-
-
-function GuestDropdown(props) {
-    return (
-        <>
-            <Dropdown title={<i className="fa-regular fa-circle-user fa-2xl m-5" ></i> } id="user">
-                <DropdownHeader><h1 className='font-medium'>GUEST</h1></DropdownHeader>
-
-                <DropdownDivider></DropdownDivider>
-                <DropdownItem><LoginModal/></DropdownItem>
-                <DropdownItem><RegisModal/></DropdownItem>
-            </Dropdown>
-            
-        </>
-
-    )
-}
-
-function UserDropdown(props) {
+    const state = useSelector(state => state);
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const clickSignout = (e)=>{
+    const clickSignout = (e) => {
         dispatch(logout())
         navigate('/')
     }
-// ==========================================================  User
-if(props.userInfo.role==="1"){
-    return (<div>
-        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
-            <DropdownHeader><span className="block text-lg">
-                {props.userInfo?.username}
-            </span>
-                <span className="block text-lg font-medium truncate">
-                {props.userInfo?.email}
-                </span></DropdownHeader>
 
-            <DropdownDivider></DropdownDivider>
-            <DropdownItem  >Profile</DropdownItem>
-            <DropdownItem  >Setting</DropdownItem>
-            <DropdownDivider></DropdownDivider>
-            <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
-        </Dropdown>
-    </div>
+    return (<div> 
+        <AdminDropdown status={state?.auth?.userInfo?.role} clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
+        <UserDropdown status={state?.auth?.userInfo?.role} clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
+        <SellerDropdown  status={state?.auth?.userInfo?.role}clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
+        <GuestDropdown status={state?.auth?.userInfo?.role} />
+        </div>
     )
-}
-// ==========================================================  Seller
-else if (props.userInfo.role==="2"){
-    return (<div>
-        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
-            <DropdownHeader><span className="block text-lg">
-                {props.userInfo?.username}
-            </span>
-                <span className="block text-lg font-medium truncate">
-                {props.userInfo?.email}
-                </span></DropdownHeader>
 
-            <DropdownDivider></DropdownDivider>
-            <DropdownItem  ><Link to={`/shopProfile/${props.userInfo?.ShopPath?.shopPath}`}>Shop</Link></DropdownItem>
-            <DropdownItem  ><Link to={`/shopProfile/${props.userInfo?.ShopPath?.shopPath}/setting`}>Setting</Link></DropdownItem>
-            <DropdownDivider></DropdownDivider>
-            <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
-        </Dropdown>
-    </div>
-    )
+
+
 }
-// ==========================================================  Admin
-else if (props.userInfo.role==="0"){
-    return (<div>
+
+function AdminDropdown(props) {
+    const { clickSignout, userInfo,status } = props;
+    return (<div className={status === "0"? "block": " hidden "}>
         <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
             <DropdownHeader><span className="block text-lg">
-                {props.userInfo?.username}
+                {userInfo?.username}
             </span>
                 <span className="block text-lg font-medium truncate">
-                {props.userInfo?.email}
+                    {userInfo?.email}
                 </span></DropdownHeader>
 
             <DropdownDivider></DropdownDivider>
@@ -103,4 +49,63 @@ else if (props.userInfo.role==="0"){
     </div>
     )
 }
+function UserDropdown(props) {
+    const { clickSignout, userInfo,status } = props;
+
+
+    return (<div className={status === "1"? "block": " hidden "}>
+        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
+            <DropdownHeader><span className="block text-lg">
+                {userInfo?.username}
+            </span>
+                <span className="block text-lg font-medium truncate">
+                    {userInfo?.email}
+                </span></DropdownHeader>
+
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem  >edit</DropdownItem>
+            <DropdownItem  >Setting</DropdownItem>
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
+        </Dropdown>
+    </div>
+    )
+}
+function SellerDropdown(props) {
+    const { clickSignout, userInfo ,status} = props;
+
+
+    return (<div className={status === "2"? "block": " hidden "}>
+        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
+            <DropdownHeader><span className="block text-lg">
+                {userInfo?.username}
+            </span>
+                <span className="block text-lg font-medium truncate">
+                    {userInfo?.email}
+                </span></DropdownHeader>
+
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem  ><Link to={`/shopProfile/${userInfo?.ShopPath?.shopPath}`}>Shop</Link></DropdownItem>
+            <DropdownItem  ><Link to={`/shopProfile/${userInfo?.ShopPath?.shopPath}/setting`}>Setting</Link></DropdownItem>
+            <DropdownDivider></DropdownDivider>
+            <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
+        </Dropdown>
+    </div>
+    )
+}
+function GuestDropdown(props) {
+    const { status = "gust"} = props
+    return (
+        <div className={status === "gust"? "block": " hidden "}>
+            <Dropdown title={<i className="fa-regular fa-circle-user fa-2xl m-5" ></i>} id="user">
+                <DropdownHeader><h1 className='font-medium'>GUEST</h1></DropdownHeader>
+
+                <DropdownDivider></DropdownDivider>
+                <DropdownItem><LoginModal /></DropdownItem>
+                <DropdownItem><RegisModal /></DropdownItem>
+            </Dropdown>
+
+        </div>
+
+    )
 }

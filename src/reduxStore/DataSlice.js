@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { fetchCategoryDataAPI, fetchShopData } from "../api/dataApi";
+import { fetchCategoryDataAPI, fetchProductDataAPI, fetchShopData } from "../api/dataApi";
+import { loading } from "./LoadingSlice";
 
 
 const dataSlice = createSlice({
     name: 'path',
-    initialState: { allPath: [],shopInfo:{} ,productCategory:{}},
+    initialState: { allPath: [],shopInfo:{} ,productCategory:{},allProductInfo:[]},
     reducers: {
         fetchPath: (state, action) => {
             state.allPath = action.payload;
@@ -15,6 +16,9 @@ const dataSlice = createSlice({
         },
         fetchProductCategory: (state, action)=>{
             state.productCategory = action.payload;
+        },
+        fetchAllProduct: (state, action)=>{
+            state.allProductInfo = action.payload;
         }
     }
 })
@@ -55,7 +59,21 @@ export const thunkCategoryData = shopId => async dispatch => {
     }
 }
 
+export const thunkAllProduct = () => async dispatch => {
+    try {
+        dispatch(loading(true))
+        const res = await fetchProductDataAPI();
+        dispatch(fetchAllProduct(res.data));
+        console.log(res.data,'data');
+
+    } catch (error) {
+        throw error
+    }
+    finally{
+        dispatch(loading(false))
+    }
+}
 
 export default dataSlice.reducer
-const { fetchPath ,fetchShopInfo,fetchProductCategory} = dataSlice.actions;
-export { fetchPath ,fetchShopInfo,fetchProductCategory}
+const { fetchPath ,fetchShopInfo,fetchProductCategory,fetchAllProduct} = dataSlice.actions;
+export { fetchPath ,fetchShopInfo,fetchProductCategory,fetchAllProduct}

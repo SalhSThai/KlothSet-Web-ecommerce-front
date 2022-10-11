@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createProduct } from '../../../../api/productApi';
 import { loading } from '../../../../reduxStore/LoadingSlice';
-import { thunkCreateProduct } from '../../../../reduxStore/ProductSlice';
+import { thunkCreateProduct, thunkSubCreateProduct } from '../../../../reduxStore/ProductSlice';
 import Button from '../../../item/Button'
 import CheckBox from '../../../item/CheckBox';
 import FileButton from '../../../item/FileButton';
@@ -20,20 +20,10 @@ export default function AddSubProductBody(props) {
     const dispatch = useDispatch()
 
     const data = state?.shop?.shopInfo;
-    const [subName,setSubName] = useState("")
-    const [proCur,setProCur] = useState({})
-    const chooseSubName = (e) => {
-        console.log("choose");
-        setSubName(e.target.value)
-    }
-    // useEffect(()=>{
-    //     const findone = data?.Products?.[index]?.ItemDetails?.findOne(i=>i.subName===subName)
-    //     console.log(findone);
-    //     // setProCur(findone)
-    // },[])
+
 
     const initialInfo = {
-        productName: "",
+        subName: "",
         price: "", size: "xs",
         amount: "", color: "",
         brandName: "",
@@ -45,40 +35,17 @@ export default function AddSubProductBody(props) {
     };
     const [productInfo, setProductInfo] = useState(initialInfo)
     useEffect(() => {
-        // console.log(data?.Products?.[index]?.ItemDetails);
-        const findone = data?.Products?.[index]?.ItemDetails?.find?.(i=>i?.subName===String(subName)) 
-        console.log(findone);
 
         setImgClass(image)
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("handleSubmit");
         toast('Add Process');
-        const formData = new FormData();
-        if (!productInfo?.profileProductImage) {
-            return toast.error('image is required');
-        }
         try {
-            formData.append('productName', productInfo?.productName);
-            formData.append('profileProductImage', productInfo?.profileProductImage);
-            formData.append('price', productInfo?.price);
-            formData.append('amount', productInfo?.amount);
-            formData.append('brandName', productInfo?.brandName);
-            formData.append('categoryName', productInfo?.category);
-            formData.append('size', productInfo?.size);
-            formData.append('gender', productInfo?.gender);
-            formData.append('color', productInfo?.color);
-            formData.append('description', productInfo?.description);
-            formData.append('sellerId', state?.auth?.userInfo?.id);
 
-
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1]);
-            }
             dispatch(loading(true));
-            dispatch(thunkCreateProduct(formData));
+            dispatch(thunkSubCreateProduct({ ...productInfo, productId: data?.Products?.[index]?.id, sellerId: state?.auth?.userInfo?.id }));
             close(false);
         }
         catch (err) { toast.error('ERRor'); }
@@ -92,7 +59,7 @@ export default function AddSubProductBody(props) {
             </div>
             <form className='grid grid-flow-row-dense grid-cols-3  justify-start items-start w-full p-4 text-start' onSubmit={e => handleSubmit(e)}>
 
-                <TextInputBar className={"col-span-2"} label="SubName" id="SubNameAdd" value={subName} onChange={chooseSubName} />
+                <TextInputBar className={"col-span-2"} label="SubName" id="SubNameAdd" value={productInfo?.subName} onChange={e => setProductInfo({ ...productInfo, subName: e.target.value })} />
 
                 <TextInputBar className={"col-span-1"} label="Price" id="PriceAdd" value={productInfo?.price} onChange={e => setProductInfo({ ...productInfo, price: e.target.value })} />
                 <TextInputBar className={"col-span-1"} label="Amount" id="AmountAdd" value={productInfo?.amount} onChange={e => setProductInfo({ ...productInfo, amount: e.target.value })} />

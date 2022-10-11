@@ -56,6 +56,7 @@ export default function AddNewProductBody(props) {
             for (var pair of formData.entries()) {
                 console.log(pair[0] + ', ' + pair[1]);
             }
+            
             dispatch(loading(true));
             dispatch(thunkCreateProduct(formData)); 
             close(false);

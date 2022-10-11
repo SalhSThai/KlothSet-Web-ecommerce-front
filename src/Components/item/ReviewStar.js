@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import Start from '../../Asset/Start'
 
 export default function ReviewStar(props) {
-    const {starPoint} = props;
+    const {starPoint=0,id,className} = props;
     const [reviewStart, setReviewStar] = useState([])
+    const state = useSelector(state => state)
     const arr = new Array(5).fill(false)
     useEffect(() => {
         const newArr  = arr.map((i,dex)=> dex <=( starPoint-1) ? true:false)
@@ -11,7 +13,7 @@ export default function ReviewStar(props) {
     }, [starPoint])
 
     return (
-        <div className="mt-2.5 mb-5 flex items-center">
+        <div className={`"mt-2.5 mb-5 flex items-center" ${className}`}>
             <Start star={reviewStart[0]}/>
             <Start star={reviewStart[1]}/>
             <Start star={reviewStart[2]}/>

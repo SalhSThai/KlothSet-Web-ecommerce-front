@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addCartApi, fetchMyCartApi } from "../api/cartApi";
+import { addCartApi, deleteCartApi, fetchMyCartApi } from "../api/cartApi";
 import { loading } from "./LoadingSlice";
 
 const CartSlice = createSlice({
@@ -7,11 +7,17 @@ const CartSlice = createSlice({
     initialState: { Mycart:[]},
     reducers: {
         addCart: (state, action) => {
-            state.Mycart = action.payload
+            console.log(action.payload,"1");
+            state.Mycart = [...action.payload]
         },
         fetchCart: (state, action) => {
-            state.Mycart = [...state.Mycart,...action.payload]
+            console.log(action.payload,"2");
+            state.Mycart = [...action.payload]
         },
+        deleteCart:(state,action) => {
+            state.Mycart = []
+
+        }
     }
 })
 
@@ -20,7 +26,7 @@ export const thunkAddCart = (input) => async dispatch => {
     try {
         dispatch(loading(true))
         const res = await addCartApi(input);
-        dispatch(addCart(res.data));
+        dispatch(fetchCart(res.data));
 
     } catch (error) {
         throw error
@@ -33,9 +39,20 @@ export const thunkfetchMyCart = (input) => async dispatch => {
     try {
         dispatch(loading(true))
         const res = await fetchMyCartApi(input);
-        console.log(input);
-        console.log(res,"====================================");
         dispatch(fetchCart(res.data));
+
+    } catch (error) {
+        throw error
+    }
+    finally{
+        dispatch(loading(false))
+    }
+}
+export const thunkDeleteCart = (id) => async dispatch => {
+    try {
+        dispatch(loading(true))
+        const res = await deleteCartApi(id);
+        dispatch(deleteCart([]));
 
     } catch (error) {
         throw error
@@ -46,5 +63,5 @@ export const thunkfetchMyCart = (input) => async dispatch => {
 }
 
 export default CartSlice.reducer
-const { addCart,fetchCart} = CartSlice.actions;
-export { addCart,fetchCart}
+const { addCart,fetchCart,deleteCart} = CartSlice.actions;
+export { addCart,fetchCart,deleteCart}

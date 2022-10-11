@@ -16,23 +16,23 @@ export default function LoginDropdown() {
         dispatch(logout())
         navigate('/')
     }
+   const  profileIcon = (<div className="h-full w-full "><img className='w-[32px] h-[32px] object-cover rounded-full' src={state?.auth?.userInfo?.profileImage}></img></div>)
 
-    return (<div> 
-        <AdminDropdown status={state?.auth?.userInfo?.role} clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
-        <UserDropdown status={state?.auth?.userInfo?.role} clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
-        <SellerDropdown  status={state?.auth?.userInfo?.role}clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
-        <GuestDropdown status={state?.auth?.userInfo?.role} />
+    return (<div className=' w-[80px] h-[40px] flex justify-center items-center'> 
+        <AdminDropdown title={profileIcon} status={state?.auth?.userInfo?.role} clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
+        <UserDropdown title={profileIcon} status={state?.auth?.userInfo?.role} clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
+        <SellerDropdown  title={profileIcon} status={state?.auth?.userInfo?.role}clickSignout={clickSignout} userInfo={state?.auth?.userInfo} />
+        <GuestDropdown title={profileIcon} status={state?.auth?.userInfo?.role} />
         </div>
     )
 
 
 
 }
-
 function AdminDropdown(props) {
-    const { clickSignout, userInfo,status } = props;
+    const { clickSignout, userInfo,status,title} = props;
     return (<div className={status === "0"? "block": " hidden "}>
-        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
+        <Dropdown title={title} id="user">
             <DropdownHeader><span className="block text-lg">
                 {userInfo?.username}
             </span>
@@ -50,11 +50,11 @@ function AdminDropdown(props) {
     )
 }
 function UserDropdown(props) {
-    const { clickSignout, userInfo,status } = props;
+    const { clickSignout, userInfo,status ,title} = props;
 
 
     return (<div className={status === "1"? "block": " hidden "}>
-        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
+        <Dropdown title={title} id="user">
             <DropdownHeader><span className="block text-lg">
                 {userInfo?.username}
             </span>
@@ -63,8 +63,8 @@ function UserDropdown(props) {
                 </span></DropdownHeader>
 
             <DropdownDivider></DropdownDivider>
-            <DropdownItem  >edit</DropdownItem>
-            <DropdownItem  >Setting</DropdownItem>
+            <DropdownItem  ><Link to={`/shopProfile/${userInfo?.ShopPath?.shopPath}`}>Profile</Link></DropdownItem>
+            <DropdownItem  ><Link to={`/shopProfile/${userInfo?.ShopPath?.shopPath}/setting`}>Setting</Link></DropdownItem>
             <DropdownDivider></DropdownDivider>
             <DropdownItem><div role='button' onClick={clickSignout}>Sign out</div></DropdownItem>
         </Dropdown>
@@ -72,11 +72,11 @@ function UserDropdown(props) {
     )
 }
 function SellerDropdown(props) {
-    const { clickSignout, userInfo ,status} = props;
+    const { clickSignout, userInfo ,status,title} = props;
 
 
     return (<div className={status === "2"? "block": " hidden "}>
-        <Dropdown title={<Link ><i className="fa-regular fa-circle-user fa-2xl  m-5" ></i></Link>} id="user">
+        <Dropdown title={title} id="user">
             <DropdownHeader><span className="block text-lg">
                 {userInfo?.username}
             </span>
@@ -94,7 +94,7 @@ function SellerDropdown(props) {
     )
 }
 function GuestDropdown(props) {
-    const { status = "gust"} = props
+    const { status = "gust",title} = props
     return (
         <div className={status === "gust"? "block": " hidden "}>
             <Dropdown title={<i className="fa-regular fa-circle-user fa-2xl m-5" ></i>} id="user">

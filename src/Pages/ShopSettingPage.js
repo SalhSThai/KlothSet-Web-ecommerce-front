@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import EditeBar from '../Components/ShoppingSettingPage/item/EditeBar';
-import { thunkCategoryData, thunkShopData } from '../reduxStore/DataSlice';
+import { plus, thunkCategoryData, thunkPlus, thunkShopData } from '../reduxStore/DataSlice';
 import AddButton from '../Asset/AddButton';
 import { showChangeProfilePicture, showDeletedModal } from '../reduxStore/EditBarSlice';
 import ModalShopSetting from '../Components/ShoppingSettingPage/ModalShopSetting';
@@ -18,11 +18,10 @@ export default function ShopSettingPage() {
   const dispatch = useDispatch()
   const [showChangeProfile, setShowChangeProfile] = useState(false)
   const data = state?.shop?.shopInfo;
-  console.log(state, "data");
+  const auth = state?.auth?.userInfo;
 
   useEffect(() => {
     dispatch(thunkAuthShopData(state?.auth?.userInfo?.id))
-    console.log("state?.shop?.shopInfo");
   }, [])
 
   const Card = () => {
@@ -40,7 +39,7 @@ export default function ShopSettingPage() {
 
         {data?.Categories?.map(i => <div role="button" className='text-lg my-1 font-medium' key={i?.id}>{i?.categoryName}</div>)}
         <div className='absolute bottom-0 '>
-          <Button  >ADD CATEGORY</Button>
+          <Button  ><div >ADD CATEGORY</div></Button>
 
         </div>
       </div>
@@ -52,9 +51,9 @@ export default function ShopSettingPage() {
       <div className='flex flex-col justify-center items-center w-3/4 h-full '>
         <div className='relative w-full h-[450px] bg-slate-400 bg-center bg-cover' style={{ backgroundImage: `url(${data?.ShopCarousals?.[0].urlCarousal})`, boxShadow: "2px 2px 8px 4px rgba(0, 0, 0, 0.1)" }} >
           <div className='absolute w-[250px] h-[250px]  bottom-0 left-0 flex flex-col justify-center items-center overflow-hidden'>
-            <div className='relative rounded-full w-[150px] h-[150px] bg-center bg-cover' style={{ backgroundImage: `url(${data?.profileImage})` }} >
+            <div className='relative rounded-full w-[150px] h-[150px] bg-center bg-cover' style={{ backgroundImage: `url(${auth?.profileImage})` }} >
               <AddButton className='absolute bottom-0 right-0' onClick={e => setShowChangeProfile(true)} />
-              <ChangeProfilePicture status={showChangeProfile} image={data?.profileImage} onClose={e => setShowChangeProfile(false)} />
+              <ChangeProfilePicture status={showChangeProfile} image={auth?.profileImage} onClose={e => setShowChangeProfile(false)} />
 
             </div>
             <div className='text-4xl font-bold 10-text-only' >{data?.shopName}</div>
@@ -75,7 +74,7 @@ export default function ShopSettingPage() {
               <ProductCard
                 edit key={i?.id} id={i?.id} index={d} image={i?.productImage}
                 productName={i?.productName} brandName={i?.brandName}
-                price={i?.price} onEdited={e => { }} />)}
+                price={i?.price} i={i} onEdited={e => { }} />)}
           </div>
         </div>
       </div>

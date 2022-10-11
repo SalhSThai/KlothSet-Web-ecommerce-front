@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { changeCoverApi } from "../api/authApi";
 import { fetchAuthShopDataApi, uploadCarousal } from "../api/authShopApi";
+import { loading } from "./LoadingSlice";
 
 
 const ShopSlice = createSlice({
@@ -9,6 +11,13 @@ const ShopSlice = createSlice({
         factchShopInfo: (state, action) => {
             state.shopInfo =action.payload
         },
+        addNewProduct: (state, action) => {
+            state.shopInfo ={...state.shopInfo}
+        },
+        changeCoverShop: (state, action) => {
+            state.shopInfo ={...state.shopInfo,ShopCarousals:[action.payload]}
+        },
+
 
     }
 })
@@ -23,17 +32,20 @@ export const thunkAuthShopData = userId => async dispatch => {
     finally{
     }
 }
-export const thunkUploadCarousal = (userId) => async dispatch => {
+export const thunkUploadCarousal = (formData,id) => async dispatch => {
     try {
-        const res = await uploadCarousal(userId)
-        // dispatch(factchShopInfo(res.data))
+        dispatch(loading(true))
+        const res = await changeCoverApi(formData,id)
+        dispatch(changeCoverShop(res.data))
     } catch (error) {
         throw error
     }
     finally{
+        dispatch(loading(false))
+
     }
 }
 
 export default ShopSlice.reducer
-const { factchShopInfo } = ShopSlice.actions;
-export { factchShopInfo }
+const { factchShopInfo,addNewProduct,changeCoverShop} = ShopSlice.actions;
+export { factchShopInfo ,addNewProduct,changeCoverShop}

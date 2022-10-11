@@ -20,6 +20,8 @@ export default function MenuSideBar(props) {
         <SideBarItem><Link>STYLE</Link></SideBarItem>
         <SideBarItem><Link>THEME</Link></SideBarItem>
         <SideBarItem><Link>GUILD</Link></SideBarItem>
+        <SideBarItem><Link to={'/BYEBYE'}>BYE BYE</Link></SideBarItem>
+
       </Drawer>
     </div>
   )

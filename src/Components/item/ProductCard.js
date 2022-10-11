@@ -9,7 +9,7 @@ import ReviewStar from "./ReviewStar";
 import GroupProductEdit from "../ShoppingSettingPage/item/GroupProductEdit"
 
 export default function ProductCard(props) {
-    const { productName = "Product Name", brandName = "Kloth Shop", price = "0", image, edit, onEdited, id,index } = props;
+    const { productName = "Product Name", brandName = "Kloth Shop", price = "0", image, edit, onEdited, id,index ,i} = props;
     const [status, setStatus] = useState(false);
     const [editStatus, setEditStatus] = useState(false)
     const state = useSelector(state => state);
@@ -44,11 +44,11 @@ export default function ProductCard(props) {
                         <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                             {`${brandName} : ${productName}`}</h1>
                     </Link>
-                    <ReviewStar />
+                    <ReviewStar starPoint={i?.star}/>
                     <div className="flex items-center justify-between">
                         <span className="text-3xl font-bold text-gray-900 dark:text-white">
                             {`${price} ฿`}</span>
-                        <GroupProductEdit image={image} id={id} productName={productName} index={index}/>
+                        <GroupProductEdit image={image} id={id} productName={productName} index={index} i={i}/>
                     </div>
                 </div>
             </div>

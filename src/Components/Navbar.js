@@ -1,7 +1,10 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Logo from '../Asset/Logo'
 import FunctionFetch from '../function/FunctionFetch'
+import { thunkAllProduct } from '../reduxStore/DataSlice'
+import { thunkAuthShopData } from '../reduxStore/ShopSlice'
 import CartDropdown from './Navbar/CartDropdown'
 import LoginDropdown from './Navbar/LoginDropdown'
 import MenuSideBar from './Navbar/MenuSideBar'
@@ -12,6 +15,9 @@ import Spinner from './reuseComponent/Spinner'
 function Navbar() {
     const state = useSelector(state => state.loading);
     const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(thunkAllProduct());
+      }, [])
     return (
         <>
         {state.loadingShow?<Spinner/>:null}

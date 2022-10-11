@@ -7,6 +7,7 @@ import ProfileHomePage from './Pages/ProfileHomePage';
 import ShopHomePage from './Pages/ShopHomePage';
 import ShopSettingPage from './Pages/ShopSettingPage';
 import FunctionFetch from './function/FunctionFetch';
+import BYEBYE from './Pages/BYEBYE';
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
         <Route  path='/userProfile/:id' element={<ProfileHomePage />} ></Route>
         <Route  path='/shopProfile/:shopName' element={<ShopHomePage />} ></Route>
         {state.auth?.userInfo?.role === "2" ? (<Route  path={`/shopProfile/:shopName/setting`} element={<ShopSettingPage />} />):null}
+        <Route  path='/BYEBYE' element={<BYEBYE />} ></Route>
+
         <Route path='*' element={<h1>404! this page is not found!!!</h1>} />
       </Route>
     </Routes>

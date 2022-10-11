@@ -10,12 +10,11 @@ import TextInputBarSelect from '../../../../item/TextInputBarSelect';
 
 
 export default function AddtoCartBody(props) {
-  const { close, image, index, product } = props;
+  const { onClose, image, index, product } = props;
 // ?====================================================================================== REDUX ==============================
 
   const state = useSelector(state => state);
   const dispatch = useDispatch()
-  console.log(state);
 
 // *====================================================================================== CONSTATN ==============================
   const initialInfo = {
@@ -50,8 +49,8 @@ export default function AddtoCartBody(props) {
     toast('THANK YOU :)');
 
     try {
-      dispatch(thunkAddCart({userId:state?.auth?.userInfo?.id,pruductId:product?.id,sellerId:product?.sellerId,itemId:productInfo?.itemDetailId}))
-      // close(false);
+      dispatch(thunkAddCart({userId:state?.auth?.userInfo?.id,itemId:productInfo?.itemDetailId,price:productInfo?.price}))
+      onClose(false);
     }
     catch (err) { toast.error('ERRor'); }
   }

@@ -1,6 +1,6 @@
 import axios from '../config/axios';
 
-export const fetchShopData = input => axios.post(`/data/fetchShopData/${input}`); 
+export const fetchShopDataByshopNameApi = path => axios.post(`/data/fetchShopData/${path}`); 
 export const fetchCategoryDataAPI = shopId => axios.post(`/data/fetchCategoryData/${shopId}`);   
 export const fetchProductDataAPI = () => axios.get(`/data/fetchProductData/`);  
 

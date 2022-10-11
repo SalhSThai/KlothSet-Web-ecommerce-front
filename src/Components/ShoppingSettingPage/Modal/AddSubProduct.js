@@ -11,7 +11,7 @@ export default function AddSubProduct(props) {
       <NewModal labelHeader={productName}  status={status} close={onClose} outside={true} width={"w-5/6"} >
       <ModalBody>
         <div className='flex flex-col justify-center items-center w-full h-full'>
-          <AddSubProductBody image={image} index={index}/>
+          <AddSubProductBody close={onClose} image={image} index={index}/>
         </div>
       </ModalBody>
     </NewModal>

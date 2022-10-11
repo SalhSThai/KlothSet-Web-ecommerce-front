@@ -12,7 +12,7 @@ import TextInputBar from '../../../item/TextInputBar';
 import TextInputBarSelect from '../../../item/TextInputBarSelect';
 
 export default function EditSubProductBody(props) {
-    const { close, image, index } = props;
+    const { close, image, index ,i} = props;
     const [check, setCheck] = useState(false);
     const [category, setCategory] = useState([])
     const [imgClass, setImgClass] = useState("")
@@ -36,7 +36,6 @@ export default function EditSubProductBody(props) {
     const chooseSubName = (e) => {
         
         const findOne = data?.Products?.[index]?.ItemDetails?.find?.(i=>i?.id===+e?.target?.value)
-        console.log(findOne);
         setProductInfo({...initialInfo,...findOne,itemDetailId:findOne?.id})
     } 
     useEffect(() => {
@@ -45,14 +44,13 @@ export default function EditSubProductBody(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("handleSubmit");
         toast('Add Process');
       
         try {
-            console.log(productInfo);
             dispatch(loading(true));
             dispatch(thunkEditSubProduct(productInfo));
-            // close(false);
+            close(false);
+            setCheck(false)
         }
         catch (err) { toast.error('ERRor'); }
         finally { dispatch(loading(false)) }
@@ -80,7 +78,7 @@ export default function EditSubProductBody(props) {
 
 
 
-                <Button className={"col-span-3 "}>ADD</Button>
+                <Button className={"col-span-3 "}>EDIT</Button>
 
             </form>
         </div>

@@ -8,10 +8,7 @@ function HomePage(props) {
     const state = useSelector(state => state);
     const dispatch = useDispatch()
     const productArray = state?.data?.allProductInfo
-    useEffect(()=>{
-        dispatch(thunkAllProduct())
-        
-    },[])
+  
     return (<div className='flex flex-col justify-center items-center w-screen'>
         <CarousalComponent />
         {/* <CarousalComponent2/> */}

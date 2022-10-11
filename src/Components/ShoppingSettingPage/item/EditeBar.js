@@ -23,7 +23,7 @@ export default function IconButton() {
         </button>
         <button onClick={e=>dispatch(showAddBanerPicture(true))} className="text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 disabled:hover:bg-white focus:ring-blue-700 focus:text-blue-700 dark:bg-transparent dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-2 dark:disabled:hover:bg-gray-800  border-l-0 pl-0 group flex h-min items-center justify-center p-0.5 text-center font-medium focus:z-10 rounded-lg" type="button">
             <span className="flex items-center !rounded-none  text-sm px-4 py-2">
-                <CarousalIcon />Add Carousal</span>
+                <CarousalIcon />Add CoverImage</span>
 
         </button>
         

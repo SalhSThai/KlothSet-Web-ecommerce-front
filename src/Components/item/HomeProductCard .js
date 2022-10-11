@@ -12,16 +12,9 @@ import AddtoCart from "../HomaPage/Component/Modal/AddtoCart";
 
 export default function HomeProductCard(props) {
     const {  price = "0", image, edit, onEdited, id, className ,product,starPoint} = props;
-    const [status, setStatus] = useState(false);
     const [addtoCart, setAddtoCart] = useState(false)
     const state = useSelector(state => state);
     const dispatch = useDispatch();
-    const onClose = (e) => {
-        setStatus(false)
-    }
-    const showDelete = (e) => {
-        setStatus(true)
-    }
     const onCloseEdit = e => {
         setAddtoCart(false)
     }

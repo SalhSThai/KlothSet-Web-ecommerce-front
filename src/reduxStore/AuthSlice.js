@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import {   loginApi, registerApi, rememberMeApi } from "../api/authApi";
+import {   changeProfilePicApi, loginApi, registerApi, rememberMeApi } from "../api/authApi";
 import axios from '../config/axios';
 import { addAccessToken, getAccessToken,removeAccessToken } from "../utils/localStorage";
 import { thunkfetchMyCart } from "./CartSlice";
@@ -28,6 +28,9 @@ const authSlice = createSlice({
         },
         rememberLogin:(state, action)=>{
             state.isLogin = true;
+        },
+        changeProfile:(state, action)=>{
+            state.userInfo = {...state.userInfo,profileImage:action.payload};
         }
     }
 })
@@ -78,6 +81,24 @@ export const thunkRemember =  () => async dispatch => {
     }
 }
 
+export const thunkChangeProfilePicture =  (formData,id) => async dispatch => {
+    try {
+        dispatch(loading(true))
+        console.log(id);
+        const user = await changeProfilePicApi(formData,id)
+        dispatch(changeProfile(user?.data?.profileImage))
+        console.log(user,"user ========================");
+        // user && dispatch(login(user?.data));
+        // dispatch(thunkAuthShopData(user?.data?.id))
+        // dispatch(thunkfetchMyCart(user?.data?.id));
+    } catch (error) {
+        throw error
+    }
+    finally{
+        dispatch(loading(false))
+    }
+}
+
 export default authSlice.reducer
-const { login, register, showLogin,showRegister ,rememberLogin,logout} = authSlice.actions;
-export { login, register, showLogin,showRegister,rememberLogin ,logout}
+const { login, register, showLogin,showRegister ,rememberLogin,logout,changeProfile} = authSlice.actions;
+export { login, register, showLogin,showRegister,rememberLogin ,logout,changeProfile}

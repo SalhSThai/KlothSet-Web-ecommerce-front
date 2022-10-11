@@ -15,7 +15,7 @@ import EditSubProduct from '../Modal/EditSubProduct';
 import AddSubProduct from '../Modal/AddSubProduct';
 
 export default function IconButton(props) {
-    const {image,id,productName,index} = props
+    const {image,id,productName,index,i} = props
     const state = useSelector(state => state);
     const dispatch = useDispatch();
     const [addSubProduct,setAddSubProduct] = useState(false);
@@ -39,7 +39,7 @@ export default function IconButton(props) {
         <button onClick={e=>setSetting(true)} className="text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 disabled:hover:bg-white focus:ring-blue-700 focus:text-blue-700 dark:bg-transparent dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-2 dark:disabled:hover:bg-gray-800 rounded-l-none border-l-0 pl-0 group flex h-min items-center justify-center p-0.5 text-center font-medium focus:z-10 rounded-lg" type="button">
             <span className="flex items-center rounded-l-none rounded-md text-sm px-4 py-2">
                 <SettingIcon />
-                <EditProduct status={setting} image={image} id={id} onClose={e=>setSetting(false)} />
+                <EditProduct status={setting} image={image} id={id} onClose={e=>setSetting(false)} i={i}/>
                 
                 </span>
 

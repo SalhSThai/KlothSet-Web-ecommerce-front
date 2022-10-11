@@ -6,7 +6,6 @@ export default function RememberMe() {
     // const id = useSelector(state => state?.userInfo?.id);
     const dispatch = useDispatch() 
     useEffect(()=>{
-        console.log("rememberMe");
         dispatch(thunkRemember()) ;
     },[])
   return (

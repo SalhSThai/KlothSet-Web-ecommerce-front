@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Logo from '../Asset/Logo'
 import FunctionFetch from '../function/FunctionFetch'
 import { thunkAllProduct } from '../reduxStore/DataSlice'
+import { loading } from '../reduxStore/LoadingSlice'
 import { thunkAuthShopData } from '../reduxStore/ShopSlice'
 import CartDropdown from './Navbar/CartDropdown'
 import LoginDropdown from './Navbar/LoginDropdown'
@@ -21,6 +22,7 @@ function Navbar() {
     return (
         <>
         {state.loadingShow?<Spinner/>:null}
+        <div role="button" onClick={e=>dispatch(loading(true))}>GO</div>
             <div className='flex flex-col justify-center items-center w-screen '>
                 <nav className="flex justify-center items-center shadow w-full h-[120px] " >
                     <div className='flex justify-between items-center h-full w-5/6'>

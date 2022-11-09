@@ -6,7 +6,9 @@ const loadingSlice = createSlice({
     initialState: { loadingShow: false },
     reducers: {
         loading: (state, action) => {
-            state.loadingShow =action.payload
+            state.loadingShow =action.payload;
+            document.body.style.overflow = state.loadingShow ? ' hidden ' : ' auto ';
+
         },
     }
 })

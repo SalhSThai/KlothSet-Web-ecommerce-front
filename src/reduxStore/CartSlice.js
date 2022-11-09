@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addCartApi, deleteCartApi, fetchMyCartApi } from "../api/cartApi";
+import { addCartApi, buyCartApi, deleteCartApi, fetchMyCartApi } from "../api/cartApi";
 import { loading } from "./LoadingSlice";
 
 const CartSlice = createSlice({
@@ -52,6 +52,19 @@ export const thunkDeleteCart = (id) => async dispatch => {
     try {
         dispatch(loading(true))
         const res = await deleteCartApi(id);
+        dispatch(deleteCart([]));
+
+    } catch (error) {
+        throw error
+    }
+    finally{
+        dispatch(loading(false))
+    }
+}
+export const thunkBuyCart = () => async dispatch => {
+    try {
+        dispatch(loading(true))
+        const res = await buyCartApi();
         dispatch(deleteCart([]));
 
     } catch (error) {

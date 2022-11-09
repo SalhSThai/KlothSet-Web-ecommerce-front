@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Logo from '../Asset/Logo'
@@ -13,28 +13,35 @@ import NotificationDropdown from './Navbar/NotificationDropdown'
 import SearchBar from './Navbar/SearchBar'
 import SearchModal from './Navbar/SearchModal'
 import Spinner from './reuseComponent/Spinner'
+import DrawerRight from '../Components/reuseComponent/DrawerRight'
+import handleClickOutside from '../utils/useClickOutside'
 function Navbar() {
     const state = useSelector(state => state.loading);
     const dispatch = useDispatch()
+
+
+
     useEffect(() => {
         dispatch(thunkAllProduct());
-      }, [])
+       
+    }, [])
+  
     return (
         <>
-        {state.loadingShow?<Spinner/>:null}
-        <div role="button" onClick={e=>dispatch(loading(true))}>GO</div>
+            {state.loadingShow ? <Spinner /> : null}
             <div className='flex flex-col justify-center items-center w-screen '>
                 <nav className="flex justify-center items-center shadow w-full h-[120px] " >
                     <div className='flex justify-between items-center h-full w-5/6'>
-                        <MenuSideBar/>
+                        <MenuSideBar />
                         <Link to="/">
                             <div className='absolute top-0 left-1/2 -translate-x-2/4  w-[100px] h-[100px]'>
-                                <Logo/>
+                                <Logo />
                                 <h3 className="text-center">Kloth-set</h3>
                             </div>
                         </Link>
                         <div className='flex mr-5'>
-                            <CartDropdown />
+                            {/* <CartDropdown  showCart={e=>setShowCart(p=>e)}  /> */}
+                            <DrawerRight />
                             <NotificationDropdown />
                             <LoginDropdown />
                         </div>
@@ -43,7 +50,7 @@ function Navbar() {
                 <SearchModal />
 
             </div>
-            <FunctionFetch/>
+            <FunctionFetch />
         </>
     )
 }

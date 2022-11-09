@@ -33,6 +33,9 @@ to{bottom:0;opacity:1}
       left:0px;opacity:1} 
     to{left:-300px;opacity:0}
     }
+
+
+
 .dropdownShadow{
     box-shadow: 0.5px 1px 3px 1px rgba(0, 0, 0, 0.2);
 }

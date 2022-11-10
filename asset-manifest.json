@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/KlothSet-Web-ecommerce-front/static/css/main.3c8166bc.css",
+    "main.js": "/KlothSet-Web-ecommerce-front/static/js/main.68f6cf26.js",
+    "static/js/787.11d7da09.chunk.js": "/KlothSet-Web-ecommerce-front/static/js/787.11d7da09.chunk.js",
+    "static/media/fa-solid-900.ttf": "/KlothSet-Web-ecommerce-front/static/media/fa-solid-900.b48ad290d0335879a92b.ttf",
+    "static/media/fa-brands-400.ttf": "/KlothSet-Web-ecommerce-front/static/media/fa-brands-400.f9ee61fab3c11e2f3ed3.ttf",
+    "static/media/fa-solid-900.woff2": "/KlothSet-Web-ecommerce-front/static/media/fa-solid-900.66104b766c3d0462b3c5.woff2",
+    "static/media/fa-brands-400.woff2": "/KlothSet-Web-ecommerce-front/static/media/fa-brands-400.e1a247a5ef41e1975742.woff2",
+    "static/media/fa-regular-400.ttf": "/KlothSet-Web-ecommerce-front/static/media/fa-regular-400.abf801b7acb6705a15ad.ttf",
+    "static/media/fa-regular-400.woff2": "/KlothSet-Web-ecommerce-front/static/media/fa-regular-400.639d2000c1ece92eaec8.woff2",
+    "static/media/fa-v4compatibility.ttf": "/KlothSet-Web-ecommerce-front/static/media/fa-v4compatibility.f601162ae669f88823a3.ttf",
+    "static/media/fa-v4compatibility.woff2": "/KlothSet-Web-ecommerce-front/static/media/fa-v4compatibility.745989aab0d69cab7e70.woff2",
+    "index.html": "/KlothSet-Web-ecommerce-front/index.html",
+    "main.3c8166bc.css.map": "/KlothSet-Web-ecommerce-front/static/css/main.3c8166bc.css.map",
+    "main.68f6cf26.js.map": "/KlothSet-Web-ecommerce-front/static/js/main.68f6cf26.js.map",
+    "787.11d7da09.chunk.js.map": "/KlothSet-Web-ecommerce-front/static/js/787.11d7da09.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3c8166bc.css",
+    "static/js/main.68f6cf26.js"
+  ]
+}
